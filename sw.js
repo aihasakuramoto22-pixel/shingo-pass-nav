@@ -1,5 +1,5 @@
 // シンゴーパス offline cache (used only when the app is served over https next to this file)
-const C='shp-app-v38';
+const C='shp-app-v39';
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./shingo_pass_nav.html','./moped_nav.html','./manifest.json','./icon-192.png','./icon-512.png'].map(u=>new Request(u,{cache:'reload'}))).catch(()=>{})));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>/^shp-app-/.test(k)&&k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',e=>{const q=e.request;if(q.method!=='GET')return;
